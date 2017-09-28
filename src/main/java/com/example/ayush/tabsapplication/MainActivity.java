@@ -32,14 +32,14 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
         ActionBar bar = getSupportActionBar();
 
-
+        //sets the kind of navigation for the action bar to tabs
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
+        //creates the two tabs
         bar.addTab(bar.newTab().setText("Audio").setTabListener(this));
         bar.addTab(bar.newTab().setText("Video").setTabListener(this));
 
 
-
+        //adapter is intialized and attached to the Viewpager
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(adapter);
 
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
             @Override
             public void onPageSelected(int position) {
-
+                //on swiping, the tab gets changed with respect to the current position
                 getSupportActionBar().setSelectedNavigationItem(position);
             }
 
@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+        //if a tab is selected, then the pager sets the tab with respect to the position selected
         pager.setCurrentItem(tab.getPosition());
     }
 
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     public static class AudioFragment extends Fragment {
         @Nullable
         @Override
+        //inflates the audio fragment
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             super.onCreateView(inflater, container, savedInstanceState);
             View v = inflater.inflate(R.layout.audio_fragment, null);
@@ -91,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     public static class VideoFragment extends Fragment {
         @Nullable
         @Override
+        //inflates the video fragment
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             super.onCreateView(inflater, container, savedInstanceState);
             View v = inflater.inflate(R.layout.video_fragment, null);
@@ -109,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         @Override
         public Fragment getItem(int position) {
             Fragment f = null;
+            //position of each tab is given here
             if (position == 0) {
                 f = new AudioFragment();
             } else if (position == 1) {
@@ -119,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
         @Override
         public int getCount() {
+            //creates 2 tabs
             return 2;
         }
     }
